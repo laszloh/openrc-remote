@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name Arduino)(type Legacy)(uri D:/development/Projekte/openrc-remote/transmitter/hardware/pcb/Arduino/Arduino.lib)(options "")(descr ""))
+  (lib (name nRF24L01+)(type Legacy)(uri D:/development/Projekte/openrc-remote/transmitter/hardware/pcb/Arduino/nRF24L01+.lib)(options "")(descr ""))
+)
