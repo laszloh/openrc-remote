@@ -26,7 +26,6 @@
 
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library for ST7735
-#include <Ticker.h>
 
 class LcdHandler {
     public:
@@ -35,7 +34,6 @@ class LcdHandler {
         LcdHandler(uint8_t pin_cs, uint8_t pin_dc);
 
         void init(void);
-        void loop(void);
 
     private:
         enum class StateMachine {
@@ -45,7 +43,6 @@ class LcdHandler {
         };
 
         Adafruit_ST7735 tft;
-        Ticker timer;
         uint8_t pin_bl;
         StateMachine currentState;
         StateMachine nextState;
@@ -54,5 +51,6 @@ class LcdHandler {
         static const uint32_t longTimeout = 5000;     // in ms
         static const uint32_t updateIntervall = 250;  // in ms
 
-        static bool timerEvent;
+        static void BasicTask(void *pvParameters);
+        void TaskLcd(void);
 };

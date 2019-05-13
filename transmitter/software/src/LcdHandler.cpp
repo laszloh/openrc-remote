@@ -23,15 +23,14 @@
  */
 
 #include <Arduino.h>
-#include <Adafruit_GFX.h>    // Core graphics library
-#include <Adafruit_ST7735.h> // Hardware-specific library for ST7735
+#include <Arduino_FreeRTOS.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_ST7735.h>
 
 #include "LcdHandler.h"
 
-bool LcdHandler::timerEvent = false;
-
 LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst, int8_t pin_bl):
-    tft(pin_cs, pin_dc, pin_rst), timer([](){timerEvent = true;}, 5000), pin_bl(pin_bl),
+    tft(pin_cs, pin_dc, pin_rst), pin_bl(pin_bl),
     currentState(StateMachine::standby), nextState(StateMachine::statusScreen)
 {
     if(pin_bl >= 0) {
@@ -39,8 +38,13 @@ LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst, int8_t pi
         digitalWrite(pin_bl, LOW);
     }
     
-    timer.interval(shortTimeout);
-    timer.start();
+    xTaskCreate(
+        BasicTask
+        ,  (const portCHAR *) "AnalogRead"
+        ,  128 // This stack size can be checked & adjusted by reading Highwater
+        ,  this
+        ,  1  // priority
+        ,  NULL );
 }
 
 LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst):
@@ -60,16 +64,13 @@ void LcdHandler::init(void){
     tft.print(F("remote"));
 }
 
-void LcdHandler::loop(void) {
-    timer.update();
+void LcdHandler::TaskLcd(void) {
 
-    if(timerEvent) {
-        timerEvent = false;
+    for(;;) {
+        // check our buttons
 
         switch(currentState) {
         case StateMachine::standby:
-            nextState = StateMachine::statusScreen;
-            timer.interval(updateIntervall);
             break;
 
         case StateMachine::statusScreen:
@@ -81,5 +82,11 @@ void LcdHandler::loop(void) {
         }
 
         currentState = nextState;
+
+        vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
     }
+}
+
+void LcdHandler::BasicTask(void *pvParameters) {
+    static_cast<LcdHandler*>(pvParameters)->TaskLcd();
 }
