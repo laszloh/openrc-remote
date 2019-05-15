@@ -68,8 +68,6 @@ typedef struct {
   uint8_t y_axis_left;
   uint8_t x_axis_right;
   uint8_t y_axis_right;
-  uint8_t analog1;
-  uint8_t analog2;
   uint8_t buttons1;
   uint8_t buttons2;
 } data_t;

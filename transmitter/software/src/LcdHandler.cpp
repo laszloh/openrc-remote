@@ -39,13 +39,8 @@ LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst,
     digitalWrite(pin_bl, LOW);
   }
 
-  xTaskCreate(
-      BasicTask, (const portCHAR *)"AnalogRead",
-      128 // This stack size can be checked & adjusted by reading Highwater
-      ,
-      this, 1 // priority
-      ,
-      NULL);
+  xTaskCreate(BasicTask, (const portCHAR *)"lcdHandler", 128, this,
+              (tskIDLE_PRIORITY + 1), NULL);
 }
 
 LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst)

@@ -43,9 +43,9 @@ private:
   StateMachine currentState;
   StateMachine nextState;
 
-  static const uint32_t shortTimeout    = 1500; // in ms
-  static const uint32_t longTimeout     = 5000; // in ms
-  static const uint32_t updateIntervall = 250;  // in ms
+  const uint32_t shortTimeout    = 1500; // in ms
+  const uint32_t longTimeout     = 5000; // in ms
+  const uint32_t updateIntervall = 250;  // in ms
 
   static void BasicTask(void *pvParameters);
   void TaskLcd(void);
