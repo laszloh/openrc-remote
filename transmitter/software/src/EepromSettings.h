@@ -1,10 +1,10 @@
 /**
  * @file eeprom_settings.h
  * @author your name (you@domain.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2019-05-11
- * 
+ *
  * @copyright Copyright (c) 2019
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,54 +24,53 @@
 
 #pragma once
 
-#include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdlib.h>
 
 // EEPROM settings structure
 
 class Settings {
-    public:
-        uint8_t trim_x_left;
-        uint8_t trim_y_left;
-        uint8_t trim_x_right;
-        uint8_t trim_y_right;
-        uint8_t rf24_addr[5];
-        uint8_t rf24_channel;
+public:
+  uint8_t trim_x_left;
+  uint8_t trim_y_left;
+  uint8_t trim_x_right;
+  uint8_t trim_y_right;
+  uint8_t rf24_addr[5];
+  uint8_t rf24_channel;
 
-        bool defaultSettings;
+  bool defaultSettings;
 
-        Settings();
+  Settings();
 
-        bool loadSettings(uint16_t startAddress = 0);
-        void saveSettings(void);
+  bool loadSettings(uint16_t startAddress = 0);
+  void saveSettings(void);
 
-    private:
-        typedef union {
-            uint8_t raw_data;
-            struct {
-                uint8_t magic:4;
-                uint8_t res:3;
-                uint8_t valid:1;
-            };
-        } header_t;
+private:
+  typedef union {
+    uint8_t raw_data;
+    struct {
+      uint8_t magic : 4;
+      uint8_t res : 3;
+      uint8_t valid : 1;
+    };
+  } header_t;
 
-        typedef struct __attribute__ ((packed)) {
-            header_t header;
-            uint8_t trim_x_left;
-            uint8_t trim_y_left;
-            uint8_t trim_x_right;
-            uint8_t trim_y_right;
-            uint8_t rf24_addr[5];
-            uint8_t rf24_channel;
-            uint16_t crc;
-        } eeprom_settings_t;
- 
-        static const uint8_t magic = 0xD;
-        static const uint8_t invalidHeader = 0x00 | (magic << 4);
-        uint16_t eepromAddress;
+  typedef struct __attribute__((packed)) {
+    header_t header;
+    uint8_t trim_x_left;
+    uint8_t trim_y_left;
+    uint8_t trim_x_right;
+    uint8_t trim_y_right;
+    uint8_t rf24_addr[5];
+    uint8_t rf24_channel;
+    uint16_t crc;
+  } eeprom_settings_t;
 
-        void eepromLoad(eeprom_settings_t *mem, uint16_t addr);
-        void eepromWriteOnly(uint16_t addr, uint8_t value);
+  static const uint8_t magic         = 0xD;
+  static const uint8_t invalidHeader = 0x00 | (magic << 4);
+  uint16_t eepromAddress;
+
+  void eepromLoad(eeprom_settings_t *mem, uint16_t addr);
+  void eepromWriteOnly(uint16_t addr, uint8_t value);
 };
-
