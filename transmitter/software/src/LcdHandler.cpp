@@ -22,10 +22,9 @@
  *
  */
 
+#include <Arduino.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7735.h>
-#include <Arduino.h>
-#include <Arduino_FreeRTOS.h>
 
 #include "LcdHandler.h"
 
@@ -38,14 +37,6 @@ LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst,
     pinMode(pin_bl, OUTPUT);
     digitalWrite(pin_bl, LOW);
   }
-
-  xTaskCreate(
-      BasicTask, (const portCHAR *)"AnalogRead",
-      128 // This stack size can be checked & adjusted by reading Highwater
-      ,
-      this, 1 // priority
-      ,
-      NULL);
 }
 
 LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst)
@@ -83,11 +74,5 @@ void LcdHandler::TaskLcd(void) {
     }
 
     currentState = nextState;
-
-    vTaskDelay(1000 / portTICK_PERIOD_MS); // wait for one second
   }
-}
-
-void LcdHandler::BasicTask(void *pvParameters) {
-  static_cast<LcdHandler *>(pvParameters)->TaskLcd();
 }

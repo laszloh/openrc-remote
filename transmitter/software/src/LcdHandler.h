@@ -34,6 +34,7 @@ public:
   LcdHandler(uint8_t pin_cs, uint8_t pin_dc);
 
   void init(void);
+  void TaskLcd(void);
 
 private:
   enum class StateMachine { standby, statusScreen, settingsMenu };
@@ -43,10 +44,7 @@ private:
   StateMachine currentState;
   StateMachine nextState;
 
-  static const uint32_t shortTimeout    = 1500; // in ms
-  static const uint32_t longTimeout     = 5000; // in ms
-  static const uint32_t updateIntervall = 250;  // in ms
-
-  static void BasicTask(void *pvParameters);
-  void TaskLcd(void);
+  const uint32_t shortTimeout    = 1500; // in ms
+  const uint32_t longTimeout     = 5000; // in ms
+  const uint32_t updateIntervall = 250;  // in ms
 };
