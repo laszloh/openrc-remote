@@ -261,7 +261,7 @@ DC
 Text Label 4500 3400 0    50   ~ 0
 ~RST
 Text Label 4500 3500 0    50   ~ 0
-BLEN
+BL
 Wire Wire Line
 	6950 3600 7000 3600
 Wire Wire Line

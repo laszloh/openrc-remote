@@ -127,7 +127,6 @@ void loop() {
 /********************** Interrupt *********************/
 void check_radio(void)                                // Receiver role: Does nothing!  All the work is in IRQ
 {
-  
   bool tx, fail, rx;
   radio.whatHappened(tx, fail, rx);                     // What happened?  
 }
