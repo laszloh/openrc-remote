@@ -1,10 +1,10 @@
 /**
  * @file LcdHandler.h
  * @author your name (you@domain.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2019-05-11
- * 
+ *
  * @copyright Copyright (c) 2019
  *
  * This program is free software: you can redistribute it and/or modify
@@ -26,33 +26,25 @@
 
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library for ST7735
-#include <Ticker.h>
 
 class LcdHandler {
-    public:
-        LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst, int8_t pin_bl);
-        LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst);
-        LcdHandler(uint8_t pin_cs, uint8_t pin_dc);
+public:
+  LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst, int8_t pin_bl);
+  LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst);
+  LcdHandler(uint8_t pin_cs, uint8_t pin_dc);
 
-        void init(void);
-        void loop(void);
+  void init(void);
+  void TaskLcd(void);
 
-    private:
-        enum class StateMachine {
-            standby,
-            statusScreen,
-            settingsMenu
-        };
+private:
+  enum class StateMachine { standby, statusScreen, settingsMenu };
 
-        Adafruit_ST7735 tft;
-        Ticker timer;
-        uint8_t pin_bl;
-        StateMachine currentState;
-        StateMachine nextState;
+  Adafruit_ST7735 tft;
+  uint8_t pin_bl;
+  StateMachine currentState;
+  StateMachine nextState;
 
-        static const uint32_t shortTimeout = 1500;    // in ms
-        static const uint32_t longTimeout = 5000;     // in ms
-        static const uint32_t updateIntervall = 250;  // in ms
-
-        static bool timerEvent;
+  static constexpr uint32_t shortTimeout    = 1500; // in ms
+  static constexpr uint32_t longTimeout     = 5000; // in ms
+  static constexpr uint32_t updateIntervall = 250;  // in ms
 };

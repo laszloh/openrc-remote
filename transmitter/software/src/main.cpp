@@ -1,10 +1,10 @@
 /**
  * @file main.cpp
  * @author Laszlo Hegedüs (laszlo.hegedues@gmail.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2019-05-10
- * 
+ *
  * @copyright Copyright (c) 2019
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,38 +24,83 @@
 
 #include <Arduino.h>
 #include <SPI.h>
-#include "nRF24L01.h"
-#include "RF24.h"
-#include "FastADC.h"
+#include <FastADC.h>
+#include <RF24.h>
+#include <avr/power.h>
+#include <avr/sleep.h>
 
+#include "AnalogButtons.h"
 #include "EepromSettings.h"
 #include "LcdHandler.h"
 
+#define DEBUG
+
 // Hardware config
-#define TFT_CS           5
-#define TFT_DC           3
-#define TFT_RST          1
-#define TFT_BL           0
+// ATMEL ATMEGA32U4 / ARDUINO LEONARDO
+//
+// D0               PD2                 RXD1/INT2
+// D1               PD3                 TXD1/INT3
+// D2               PD1     SDA         SDA/INT1
+// D3#              PD0     PWM8/SCL    OC0B/SCL/INT0
+// D4       A6      PD4                 ADC8
+// D5#              PC6     ???         OC3A/#OC4A
+// D6#      A7      PD7     FastPWM     #OC4D/ADC10
+// D7               PE6                 INT6/AIN0
+//
+// D8       A8      PB4                 ADC11/PCINT4
+// D9#      A9      PB5     PWM16       OC1A/#OC4B/ADC12/PCINT5
+// D10#     A10     PB6     PWM16       OC1B/0c4B/ADC13/PCINT6
+// D11#             PB7     PWM8/16     0C0A/OC1C/#RTS/PCINT7
+// D12      A11     PD6                 T1/#OC4D/ADC9
+// D13#             PC7     PWM10       CLK0/OC4A
+//
+// A0       D18     PF7                 ADC7
+// A1       D19     PF6                 ADC6
+// A2       D20     PF5                 ADC5
+// A3       D21     PF4                 ADC4
+// A4       D22     PF1                 ADC1
+// A5       D23     PF0                 ADC0
+//
+// New pins D14..D17 to map SPI port to digital pins
+//
+// MISO     D14     PB3                 MISO,PCINT3
+// SCK      D15     PB1                 SCK,PCINT1
+// MOSI     D16     PB2                 MOSI,PCINT2
+// SS       D17     PB0                 RXLED,SS/PCINT0
+//
+// Connected LEDs on board for TX and RX
+// TXLED    D30     PD5                 XCK1
+// RXLED    D17     PB0
+// HWB              PE2                 HWB
 
-#define RF24_IRQ         2
-#define RF24_CE          7
-#define RF24_CS         10
-#define EEPROM_ADDR   0x00
+#define LCD_CS 13
+#define LCD_DC 12
+#define LCD_BL 7
+#define LCD_RST 3
 
-#define X_LEFT_MUX    0x04
-#define Y_LEFT_MUX    0x05
-#define X_RIGHT_MUX   0x06
-#define Y_RIGHT_MUX   0x07
-#define SW_AIN1       0x23
-#define SW_AIN2       0x24
-#define AIN3          0x20
-#define AIN4          0x22
+#define RF24_IRQ 9
+#define RF24_CE 8
+#define RF24_CS 17
+
+#define PE_LATCH 10
+#define PE_CS 11
+
+#define EEPROM_ADDR 0x00
+
+#define H_LEFT_MUX 0x00
+#define V_LEFT_MUX 0x01
+#define H_RIGHT_MUX 0x04
+#define V_RIGHT_MUX 0x05
+#define TRIM_BUTTONS_MUX 0x06
+#define GUI_BUTTONS_MUX 0x07
+#define VBAT_MUX 0x21
 
 // Hardware configuration
 RF24 radio(RF24_CE, RF24_CS);
-FastADC(analog, 8, true);
-LcdHandler lcd(TFT_CS,TFT_DC, TFT_RST, TFT_BL);
+FastADC(analog, 8, 4, true);
+LcdHandler lcd(LCD_CS, LCD_DC, LCD_RST, LCD_BL);
 Settings settings;
+AnalogButtons analogButtons;
 
 // Message structure
 typedef struct {
@@ -63,42 +108,47 @@ typedef struct {
   uint8_t y_axis_left;
   uint8_t x_axis_right;
   uint8_t y_axis_right;
-  uint8_t analog1;
-  uint8_t analog2;
   uint8_t buttons1;
   uint8_t buttons2;
 } data_t;
 
+typedef struct {
+  uint16_t retry_counter;
+  data_t data;
+} packet_t;
+
 // Function prototypes
-void check_radio(void);
+static void TaskRadio();
+static void enter_sleep(void);
+static uint8_t read_port_expander(void);
 
 static uint16_t get_seed(void) {
   uint16_t seed = 0;
-  uint16_t *p = (uint16_t*) (RAMEND+1);
+  uint16_t *p   = (uint16_t *)(RAMEND + 1);
   extern uint16_t __heap_start;
 
   while (p >= &__heap_start + 1)
-    seed ^= * (--p);
+    seed ^= *(--p);
 
   return seed;
 }
 
 void setup() {
   // FastADC channel setup
-  analog.reference(X_LEFT_MUX, INTERNAL);   // horizontal left stick
-  analog.reference(Y_LEFT_MUX, INTERNAL);   // vertical left stick
-  analog.reference(X_RIGHT_MUX, INTERNAL);  // horizontal right stick
-  analog.reference(Y_RIGHT_MUX, INTERNAL);  // veritcal right stick
-  analog.reference(SW_AIN1, INTERNAL);      // left analog switches
-  analog.reference(SW_AIN2, INTERNAL);      // right analog switches
-  analog.reference(AIN3, INTERNAL);         // battery voltage
-  analog.reference(AIN4, INTERNAL);         // gui switches
+  analog.reference(H_LEFT_MUX, DEFAULT);  // horizontal left stick
+  analog.reference(V_LEFT_MUX, DEFAULT);  // vertical left stick
+  analog.reference(H_RIGHT_MUX, DEFAULT); // horizontal right stick
+  analog.reference(V_RIGHT_MUX, DEFAULT); // veritcal right stick
+  analog.reference(TRIM_BUTTONS_MUX, DEFAULT); // trim buttons
+  analog.reference(GUI_BUTTONS_MUX, DEFAULT);  // gui buttons
+  analog.reference(VBAT_MUX, DEFAULT);    // battery voltage
 
   // load eeprom settings
-  if(settings.defaultSettings) {
+  settings.loadSettings();
+  if (settings.defaultSettings) {
     // default settings were loaded, create a valid unique address
     randomSeed(get_seed());
-    for(uint8_t i=0; i < sizeof(settings.rf24_addr); i++) {
+    for (uint8_t i = 0; i < sizeof(settings.rf24_addr); i++) {
       settings.rf24_addr[i] = random(UINT8_MAX);
     }
     settings.saveSettings();
@@ -112,22 +162,105 @@ void setup() {
   radio.enableAckPayload();
   radio.enableDynamicPayloads();
   radio.openWritingPipe(settings.rf24_addr);
-  attachInterrupt(RF24_IRQ, check_radio, LOW);             // Attach interrupt handler to interrupt #0 (using pin 2) on BOTH the sender and receiver
+
+  // Port expander
+  pinMode(PE_LATCH, OUTPUT);
+  digitalWrite(PE_LATCH, LOW);
+
+  pinMode(PE_CS, OUTPUT);
+  digitalWrite(PE_CS, HIGH);
 
   // TFT setup
   lcd.init();
-}
 
+  // disable unused modules
+  power_twi_disable();
+#ifndef DEBUG
+  power_usart1_disable();
+#endif
+  power_usb_disable();
+  //  power_timer0_disable();
+  //  power_timer1_disable();
+  power_timer2_disable();
+  power_timer3_disable();
+  MCUCR |= _BV(JTD);
+  ACSR &= ~_BV(ACIE);
+  ACSR |= _BV(ACD);
+}
 
 /********************** Main Loop *********************/
 void loop() {
-  delay(1000);
+
+  // calling all task
+  TaskRadio();
+  lcd.TaskLcd();
+
+  // we have reached the end of all tasks, go to sleep
+  enter_sleep();
 }
 
-/********************** Interrupt *********************/
-void check_radio(void)                                // Receiver role: Does nothing!  All the work is in IRQ
+void TaskRadio(void) // This is a task.
 {
-  bool tx, fail, rx;
-  radio.whatHappened(tx, fail, rx);                     // What happened?  
+  static uint8_t buffer[32];
+  static uint32_t last_millis = millis();
+  static packet_t packet;
+  const uint16_t txIntervall = 10; // ms
+
+  if (millis() > (last_millis + txIntervall)) {
+    last_millis = millis();
+
+    // prepare packet
+    packet.data.x_axis_left  = (analog.read(H_LEFT_MUX) >> 2);
+    packet.data.y_axis_left  = (analog.read(V_LEFT_MUX) >> 2);
+    packet.data.x_axis_right = (analog.read(H_RIGHT_MUX) >> 2);
+    packet.data.y_axis_right = (analog.read(V_RIGHT_MUX) >> 2);
+    packet.data.buttons1     = read_port_expander();
+    packet.data.buttons2     = 0x00;
+
+    radio.powerUp();
+    if (!radio.write(&packet, sizeof(packet_t))) {
+      // transmission failed, increment failed counter
+      packet.retry_counter++;
+    } else {
+      if (radio.isAckPayloadAvailable()) {
+        radio.read(&buffer, sizeof(buffer));
+      }
+    }
+    radio.powerDown();
+  }
 }
 
+static void enter_sleep(void) {
+  set_sleep_mode(SLEEP_MODE_IDLE);
+
+  ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
+    sleep_enable();
+
+// Only if there is support to disable the brown-out detection.
+#if defined(BODS) && defined(BODSE)
+    sleep_bod_disable();
+#endif
+  }
+  sleep_cpu(); // good night.
+
+  // Ugh. I've been woken up. Better disable sleep mode.
+  sleep_disable();
+}
+
+static uint8_t read_port_expander(void) {
+  uint8_t retVal;
+
+  digitalWrite(PE_LATCH, LOW);
+  _delay_us(5);
+  digitalWrite(PE_LATCH, HIGH);
+  _delay_us(10);
+
+  SPI.beginTransaction(SPISettings(4000000U, MSBFIRST, SPI_MODE0));
+  digitalWrite(PE_CS, LOW);
+  retVal = SPI.transfer(0x00);
+  digitalWrite(PE_CS, HIGH);
+  SPI.endTransaction();
+
+
+  return retVal;
+}

@@ -1,10 +1,10 @@
 /**
  * @file LcdHandler.cpp
  * @author your name (you@domain.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2019-05-11
- * 
+ *
  * @copyright Copyright (c) 2019
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,63 +23,57 @@
  */
 
 #include <Arduino.h>
-#include <Adafruit_GFX.h>    // Core graphics library
-#include <Adafruit_ST7735.h> // Hardware-specific library for ST7735
+#include <Adafruit_GFX.h>
+#include <Adafruit_ST7735.h>
+
 
 #include "LcdHandler.h"
 
-bool LcdHandler::timerEvent = false;
-
-LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst, int8_t pin_bl):
-    tft(pin_cs, pin_dc, pin_rst), timer([](){timerEvent = true;}, 5000), pin_bl(pin_bl),
-    currentState(StateMachine::standby), nextState(StateMachine::statusScreen)
-{
-    if(pin_bl >= 0) {
-        pinMode(pin_bl, OUTPUT);
-        digitalWrite(pin_bl, LOW);
-    }
-    
-    timer.interval(shortTimeout);
-    timer.start();
+LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst,
+                       int8_t pin_bl)
+    : tft(pin_cs, pin_dc, pin_rst), pin_bl(pin_bl),
+      currentState(StateMachine::standby),
+      nextState(StateMachine::statusScreen) {
+  if (pin_bl >= 0) {
+    pinMode(pin_bl, OUTPUT);
+    digitalWrite(pin_bl, LOW);
+  }
 }
 
-LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst):
-    LcdHandler(pin_cs, pin_dc, pin_rst, -1) {}
+LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc, int8_t pin_rst)
+    : LcdHandler(pin_cs, pin_dc, pin_rst, -1) {}
 
-LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc):
-    LcdHandler(pin_cs, pin_dc, -1, -1) {}
+LcdHandler::LcdHandler(uint8_t pin_cs, uint8_t pin_dc)
+    : LcdHandler(pin_cs, pin_dc, -1, -1) {}
 
-void LcdHandler::init(void){
-    tft.initR(INITR_BLACKTAB);      // Init ST7735S chip, black tab
+void LcdHandler::init(void) {
+  tft.initR(INITR_BLACKTAB); // Init ST7735S chip, black tab
 
-    tft.setCursor(54, 10);
-    tft.setTextColor(ST7735_ORANGE);
-    tft.setTextSize(20);
-    tft.print(F("OpenRC"));
-    tft.setCursor(84,20);
-    tft.print(F("remote"));
+  tft.setCursor(54, 10);
+  tft.setTextColor(ST7735_ORANGE);
+  tft.setTextSize(20);
+  tft.print(F("OpenRC"));
+  tft.setCursor(84, 20);
+  tft.print(F("remote"));
 }
 
-void LcdHandler::loop(void) {
-    timer.update();
+void LcdHandler::TaskLcd(void) {
 
-    if(timerEvent) {
-        timerEvent = false;
+  for (;;) {
+    // check our buttons
 
-        switch(currentState) {
-        case StateMachine::standby:
-            nextState = StateMachine::statusScreen;
-            timer.interval(updateIntervall);
-            break;
+    switch (currentState) {
+    case StateMachine::standby:
+      break;
 
-        case StateMachine::statusScreen:
-            nextState = StateMachine::statusScreen;
-            break;
+    case StateMachine::statusScreen:
+      nextState = StateMachine::statusScreen;
+      break;
 
-        case StateMachine::settingsMenu:
-            break;
-        }
-
-        currentState = nextState;
+    case StateMachine::settingsMenu:
+      break;
     }
+
+    currentState = nextState;
+  }
 }
