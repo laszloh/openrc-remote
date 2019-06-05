@@ -1,9 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP TestPoint_Alt
-D test point (alternative shape)
-K test point tp
-F ~
-$ENDCMP
-#
-#End Doc Library

@@ -478,7 +478,7 @@ Wire Wire Line
 Wire Wire Line
 	4200 2250 4200 2350
 $Comp
-L Modules:TestPoint_Alt P?
+L SilentWorks:TestPoint P?
 U 1 1 5D314B0A
 P 4050 3450
 AR Path="/5D314B0A" Ref="P?"  Part="1" 
@@ -494,7 +494,7 @@ Connection ~ 4050 3450
 Wire Wire Line
 	4050 3450 3700 3450
 $Comp
-L Modules:TestPoint_Alt P?
+L SilentWorks:TestPoint P?
 U 1 1 5D314CB2
 P 4750 3000
 AR Path="/5D314CB2" Ref="P?"  Part="1" 
@@ -508,7 +508,7 @@ F 3 "~" H 4950 3000 50  0001 C CNN
 $EndComp
 Connection ~ 4750 3000
 $Comp
-L Modules:TestPoint_Alt P?
+L SilentWorks:TestPoint P?
 U 1 1 5D314D5A
 P 4750 3300
 AR Path="/5D314D5A" Ref="P?"  Part="1" 
@@ -522,7 +522,7 @@ F 3 "~" H 4950 3300 50  0001 C CNN
 $EndComp
 Connection ~ 4750 3300
 $Comp
-L Modules:TestPoint_Alt P?
+L SilentWorks:TestPoint P?
 U 1 1 5D3150EF
 P 4750 4150
 AR Path="/5D3150EF" Ref="P?"  Part="1" 
