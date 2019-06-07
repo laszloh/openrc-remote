@@ -73,31 +73,28 @@
 // RXLED    D17     PB0
 // HWB              PE2                 HWB
 
-#define LCD_CS 13
-#define LCD_DC 12
-#define LCD_BL 7
-#define LCD_RST 3
+#define LCD_CS 10
+#define LCD_DC 3
+#define LCD_BL 2
+#define LCD_RST 5
 
-#define RF24_IRQ 9
-#define RF24_CE 8
-#define RF24_CS 17
+#define RF24_CE 9
+#define RF24_CS 8
 
-#define PE_LATCH 10
-#define PE_CS 11
+#define PE_LATCH 7
+#define PE_CS 6
 
 #define EEPROM_ADDR 0x00
 
-#define H_LEFT_MUX 0x00
-#define V_LEFT_MUX 0x01
-#define H_RIGHT_MUX 0x04
-#define V_RIGHT_MUX 0x05
-#define TRIM_BUTTONS_MUX 0x06
-#define GUI_BUTTONS_MUX 0x07
-#define VBAT_MUX 0x21
+#define H_LEFT_MUX 0x04   // ADC4
+#define V_LEFT_MUX 0x05   // ADC5
+#define H_RIGHT_MUX 0x06  // ADC6
+#define V_RIGHT_MUX 0x07  // ADC7
+#define VBAT_MUX 0x80     // ADC8
 
 // Hardware configuration
 RF24 radio(RF24_CE, RF24_CS);
-FastADC(analog, 8, 4, true);
+FastADC(analog, 5, 4, true);
 LcdHandler lcd(LCD_CS, LCD_DC, LCD_RST, LCD_BL);
 Settings settings;
 AnalogButtons analogButtons;
@@ -120,7 +117,7 @@ typedef struct {
 // Function prototypes
 static void TaskRadio();
 static void enter_sleep(void);
-static uint8_t read_port_expander(void);
+static uint16_t read_port_expander(void);
 
 static uint16_t get_seed(void) {
   uint16_t seed = 0;
@@ -139,8 +136,6 @@ void setup() {
   analog.reference(V_LEFT_MUX, DEFAULT);  // vertical left stick
   analog.reference(H_RIGHT_MUX, DEFAULT); // horizontal right stick
   analog.reference(V_RIGHT_MUX, DEFAULT); // veritcal right stick
-  analog.reference(TRIM_BUTTONS_MUX, DEFAULT); // trim buttons
-  analog.reference(GUI_BUTTONS_MUX, DEFAULT);  // gui buttons
   analog.reference(VBAT_MUX, DEFAULT);    // battery voltage
 
   // load eeprom settings
@@ -247,8 +242,8 @@ static void enter_sleep(void) {
   sleep_disable();
 }
 
-static uint8_t read_port_expander(void) {
-  uint8_t retVal;
+static uint16_t read_port_expander(void) {
+  uint16_t retVal;
 
   digitalWrite(PE_LATCH, LOW);
   _delay_us(5);
@@ -257,7 +252,7 @@ static uint8_t read_port_expander(void) {
 
   SPI.beginTransaction(SPISettings(4000000U, MSBFIRST, SPI_MODE0));
   digitalWrite(PE_CS, LOW);
-  retVal = SPI.transfer(0x00);
+  retVal = SPI.transfer16(0x00);
   digitalWrite(PE_CS, HIGH);
   SPI.endTransaction();
 
