@@ -256,6 +256,5 @@ static uint16_t read_port_expander(void) {
   digitalWrite(PE_CS, HIGH);
   SPI.endTransaction();
 
-
   return retVal;
 }
