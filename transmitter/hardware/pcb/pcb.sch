@@ -2205,4 +2205,59 @@ Wire Wire Line
 Connection ~ 3400 13300
 Wire Wire Line
 	3400 13300 4200 13300
+$Comp
+L Connector:Barrel_Jack XA02
+U 1 1 5CFCAC55
+P 1350 3500
+F 0 "XA02" H 1350 3700 50  0000 C CNN
+F 1 "charge" H 1350 3300 50  0000 C CNN
+F 2 "Connector_BarrelJack:BarrelJack_Horizontal" H 1400 3460 50  0001 C CNN
+F 3 "~" H 1400 3460 50  0001 C CNN
+	1    1350 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0136
+U 1 1 5CFCB0ED
+P 1750 3650
+F 0 "#PWR0136" H 1750 3400 50  0001 C CNN
+F 1 "GND" H 1755 3477 50  0000 C CNN
+F 2 "" H 1750 3650 50  0001 C CNN
+F 3 "" H 1750 3650 50  0001 C CNN
+	1    1750 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 3600 1750 3600
+Wire Wire Line
+	1750 3600 1750 3650
+Wire Wire Line
+	1650 3400 1750 3400
+Wire Wire Line
+	1750 3400 1750 3300
+$Comp
+L power:+5C #PWR0135
+U 1 1 5D009547
+P 1750 3300
+F 0 "#PWR0135" H 1750 3150 50  0001 C CNN
+F 1 "+5C" H 1765 3473 50  0000 C CNN
+F 2 "" H 1750 3300 50  0001 C CNN
+F 3 "" H 1750 3300 50  0001 C CNN
+	1    1750 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1750 3400 1900 3400
+Connection ~ 1750 3400
+$Comp
+L Connector_Generic:Conn_01x01 X110
+U 1 1 5D04821E
+P 2100 3400
+F 0 "X110" H 2180 3442 50  0000 L CNN
+F 1 "chrg_out" H 2180 3351 50  0000 L CNN
+F 2 "Connector_Wire:SolderWirePad_1x01_Drill1.2mm" H 2100 3400 50  0001 C CNN
+F 3 "~" H 2100 3400 50  0001 C CNN
+	1    2100 3400
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
