@@ -25,6 +25,7 @@
 #include <Arduino.h>
 #include <SPI.h>
 #include <FastADC.h>
+#include <ButtonDebouncer.h>
 #include <RF24.h>
 #include <avr/power.h>
 #include <avr/sleep.h>
@@ -95,6 +96,7 @@
 // Hardware configuration
 RF24 radio(RF24_CE, RF24_CS);
 FastADC(analog, 5, 4, true);
+ButtonDebouncer(debounce, uint16_t, 8, ~0x00);
 LcdHandler lcd(LCD_CS, LCD_DC, LCD_RST, LCD_BL);
 Settings settings;
 AnalogButtons analogButtons;
@@ -185,6 +187,8 @@ void setup() {
 
 /********************** Main Loop *********************/
 void loop() {
+  // debounce the buttons
+  debounce.ButtonProcess(read_port_expander());
 
   // calling all task
   TaskRadio();
@@ -209,7 +213,7 @@ void TaskRadio(void) // This is a task.
     packet.data.y_axis_left  = (analog.read(V_LEFT_MUX) >> 2);
     packet.data.x_axis_right = (analog.read(H_RIGHT_MUX) >> 2);
     packet.data.y_axis_right = (analog.read(V_RIGHT_MUX) >> 2);
-    packet.data.buttons1     = read_port_expander();
+    packet.data.buttons1     = debounce.ButtonPressed(0xFF);
     packet.data.buttons2     = 0x00;
 
     radio.powerUp();
