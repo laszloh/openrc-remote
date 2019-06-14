@@ -99,7 +99,6 @@ FastADC(analog, 5, 4, true);
 ButtonDebouncer(debounce, uint16_t, 8, ~0x00);
 LcdHandler lcd(LCD_CS, LCD_DC, LCD_RST, LCD_BL);
 Settings settings;
-AnalogButtons analogButtons;
 
 // Message structure
 typedef struct {
