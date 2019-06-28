@@ -1,6 +1,23 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
+# L_EU
+#
+DEF L_EU L 0 0 N Y 1 F N
+F0 "L" 80 0 50 V V C CNN
+F1 "L_EU" -80 0 50 V V C CNN
+F2 "" -70 0 50 V I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ R_*
+$ENDFPLIST
+DRAW
+S -40 -100 40 100 0 1 10 F
+X ~ 1 0 150 50 D 50 50 1 1 P
+X ~ 2 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # MT3608_Modul
 #
 DEF MT3608_Modul M 0 40 Y Y 1 F N
@@ -9,7 +26,7 @@ F1 "MT3608_Modul" 0 -350 50 H V C CNN
 F2 "" 0 -50 50 H I C CNN
 F3 "" 0 -50 50 H I C CNN
 DRAW
-S -350 300 350 -300 0 1 0 N
+S -350 300 350 -300 0 1 0 f
 X Vin+ 1 -500 200 150 R 30 50 1 1 W
 X Vin- 2 -500 -200 150 R 30 50 1 1 W
 X Vout+ 3 500 200 150 L 30 50 1 1 w
@@ -53,6 +70,20 @@ X D7 9 700 -400 200 L 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
+# Starpoint-2
+#
+DEF Starpoint-2 STP 0 40 N N 1 F N
+F0 "STP" 0 50 50 H V C CNN
+F1 "Starpoint-2" 0 -50 50 H I C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+C 0 0 10 0 1 0 F
+X ~ 1 -50 0 50 R 50 50 1 1 P
+X ~ 2 50 0 50 L 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # TP4056
 #
 DEF TP4056 U 0 40 Y Y 1 F N
@@ -76,7 +107,7 @@ ENDDEF
 #
 # TestPoint
 #
-DEF ~TestPoint P 0 0 N N 1 F N
+DEF TestPoint P 0 0 N N 1 F N
 F0 "P" 0 100 50 H V C CNN
 F1 "TestPoint" 0 25 4 H I C CNN
 F2 "" 0 0 50 H I C CNN

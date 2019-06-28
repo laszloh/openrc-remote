@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP L_EU
+D Resistor
+K L eu inductance
+F ~
+$ENDCMP
+#
+#End Doc Library
