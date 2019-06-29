@@ -1,0 +1,251 @@
+EESchema Schematic File Version 4
+LIBS:Mega_2560_core_2.2_PM-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 9 9
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L SilentWorks:JQ6500 M901
+U 1 1 5D2930EC
+P 3100 2700
+F 0 "M901" H 3100 3565 50  0000 C CNN
+F 1 "JQ6500" H 3100 3474 50  0000 C CNN
+F 2 "" H 3000 2800 50  0001 C CNN
+F 3 "" H 3000 2800 50  0001 C CNN
+	1    3100 2700
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2500 2350
+NoConn ~ 2500 2450
+NoConn ~ 2500 3050
+NoConn ~ 2500 3150
+NoConn ~ 3700 3150
+NoConn ~ 3700 3050
+NoConn ~ 3700 2950
+NoConn ~ 3700 2850
+NoConn ~ 3700 2750
+NoConn ~ 3700 2650
+Text HLabel 3800 2350 2    50   Output ~ 0
+VOICE_TX
+Text HLabel 4550 2450 2    50   Input ~ 0
+VOICE_RX
+Wire Wire Line
+	3700 2450 4200 2450
+Wire Wire Line
+	3800 2350 3700 2350
+Wire Wire Line
+	3700 3250 3750 3250
+Wire Wire Line
+	3750 3250 3750 3300
+$Comp
+L power:GND #PWR0902
+U 1 1 5D29540F
+P 3750 3300
+F 0 "#PWR0902" H 3750 3050 50  0001 C CNN
+F 1 "GND" H 3755 3127 50  0000 C CNN
+F 2 "" H 3750 3300 50  0001 C CNN
+F 3 "" H 3750 3300 50  0001 C CNN
+	1    3750 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2500 3250 2450 3250
+Wire Wire Line
+	2200 3250 2200 3200
+$Comp
+L power:+5V #PWR0901
+U 1 1 5D296984
+P 2200 3200
+F 0 "#PWR0901" H 2200 3050 50  0001 C CNN
+F 1 "+5V" H 2215 3373 50  0000 C CNN
+F 2 "" H 2200 3200 50  0001 C CNN
+F 3 "" H 2200 3200 50  0001 C CNN
+	1    2200 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C902
+U 1 1 5D29758E
+P 2450 3450
+F 0 "C902" H 2565 3496 50  0000 L CNN
+F 1 "100n" H 2565 3405 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 2488 3300 50  0001 C CNN
+F 3 "~" H 2450 3450 50  0001 C CNN
+	1    2450 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C901
+U 1 1 5D298659
+P 2200 3450
+F 0 "C901" H 2100 3500 50  0000 R CNN
+F 1 "10u" H 2100 3400 50  0000 R CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H 2238 3300 50  0001 C CNN
+F 3 "~" H 2200 3450 50  0001 C CNN
+	1    2200 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2200 3250 2200 3300
+Connection ~ 2200 3250
+Wire Wire Line
+	2450 3300 2450 3250
+Connection ~ 2450 3250
+Wire Wire Line
+	2450 3250 2200 3250
+$Comp
+L power:GND #PWR0904
+U 1 1 5D298FA9
+P 2450 3600
+F 0 "#PWR0904" H 2450 3350 50  0001 C CNN
+F 1 "GND" H 2455 3427 50  0000 C CNN
+F 2 "" H 2450 3600 50  0001 C CNN
+F 3 "" H 2450 3600 50  0001 C CNN
+	1    2450 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0903
+U 1 1 5D299C07
+P 2200 3600
+F 0 "#PWR0903" H 2200 3350 50  0001 C CNN
+F 1 "GND" H 2205 3427 50  0000 C CNN
+F 2 "" H 2200 3600 50  0001 C CNN
+F 3 "" H 2200 3600 50  0001 C CNN
+	1    2200 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R901
+U 1 1 5D29AE70
+P 4350 2450
+F 0 "R901" V 4250 2450 50  0000 C CNN
+F 1 "1k" V 4450 2450 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4280 2450 50  0001 C CNN
+F 3 "~" H 4350 2450 50  0001 C CNN
+	1    4350 2450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4500 2450 4550 2450
+NoConn ~ 3700 2150
+$Comp
+L Device:Speaker X901
+U 1 1 5D29D147
+P 2100 2150
+F 0 "X901" H 2000 2250 50  0000 C CNN
+F 1 "buzzer" H 2000 1950 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x02_P2.54mm_Vertical" H 2100 1950 50  0001 C CNN
+F 3 "~" H 2090 2100 50  0001 C CNN
+	1    2100 2150
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2500 2150 2300 2150
+Wire Wire Line
+	2300 2250 2500 2250
+Text HLabel 2350 2550 0    50   Input ~ 0
+SEL_K1
+Text HLabel 2350 2650 0    50   Input ~ 0
+SEL_K2
+Text HLabel 2350 2750 0    50   Input ~ 0
+SEL_K3
+Text HLabel 2350 2850 0    50   Input ~ 0
+SEL_K4
+Text HLabel 2350 2950 0    50   Input ~ 0
+SEL_K5
+Wire Wire Line
+	2500 2550 2350 2550
+Wire Wire Line
+	2350 2650 2500 2650
+Wire Wire Line
+	2500 2750 2350 2750
+Wire Wire Line
+	2350 2850 2500 2850
+Wire Wire Line
+	2500 2950 2350 2950
+$Comp
+L Connector_Generic:Conn_01x04 J901
+U 1 1 5D2A5AE3
+P 3450 4700
+F 0 "J901" H 3530 4692 50  0000 L CNN
+F 1 "Conn_01x04" H 3530 4601 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical" H 3450 4700 50  0001 C CNN
+F 3 "~" H 3450 4700 50  0001 C CNN
+	1    3450 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0906
+U 1 1 5D2A68D3
+P 3200 5050
+F 0 "#PWR0906" H 3200 4800 50  0001 C CNN
+F 1 "GND" H 3205 4877 50  0000 C CNN
+F 2 "" H 3200 5050 50  0001 C CNN
+F 3 "" H 3200 5050 50  0001 C CNN
+	1    3200 5050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 4900 3200 4900
+Wire Wire Line
+	3200 4900 3200 4950
+Wire Wire Line
+	3250 4700 2850 4700
+Wire Wire Line
+	3700 2250 4100 2250
+Text Label 4100 2250 2    50   ~ 0
+Audio_out
+Text Label 2850 4700 0    50   ~ 0
+Audio_out
+Wire Wire Line
+	3250 4600 3150 4600
+$Comp
+L power:+BATT #PWR0905
+U 1 1 5D2A963B
+P 2700 4800
+F 0 "#PWR0905" H 2700 4650 50  0001 C CNN
+F 1 "+BATT" V 2715 4927 50  0000 L CNN
+F 2 "" H 2700 4800 50  0001 C CNN
+F 3 "" H 2700 4800 50  0001 C CNN
+	1    2700 4800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2700 4800 2750 4800
+$Comp
+L Device:C C903
+U 1 1 5D2AB4F5
+P 2950 4950
+F 0 "C903" V 2900 4850 50  0000 C CNN
+F 1 "100n" V 3000 4900 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 2988 4800 50  0001 C CNN
+F 3 "~" H 2950 4950 50  0001 C CNN
+	1    2950 4950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2800 4950 2750 4950
+Wire Wire Line
+	2750 4950 2750 4800
+Connection ~ 2750 4800
+Wire Wire Line
+	2750 4800 3250 4800
+Wire Wire Line
+	3100 4950 3200 4950
+Connection ~ 3200 4950
+Wire Wire Line
+	3200 4950 3200 5050
+Text HLabel 3150 4600 0    50   Input ~ 0
+Buzzer
+$EndSCHEMATC

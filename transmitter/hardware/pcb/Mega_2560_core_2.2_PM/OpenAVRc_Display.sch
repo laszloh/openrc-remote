@@ -1,0 +1,203 @@
+EESchema Schematic File Version 4
+LIBS:Mega_2560_core_2.2_PM-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 6 9
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L SilentWorks:LCD M601
+U 2 1 5D16B99C
+P 3950 3050
+F 0 "M601" H 3950 3500 50  0000 C CNN
+F 1 "LCD" H 3950 2600 50  0000 C CNN
+F 2 "" H 3950 2950 50  0001 C CNN
+F 3 "" H 3950 2950 50  0001 C CNN
+	2    3950 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0601
+U 1 1 5D16C43F
+P 3250 2650
+F 0 "#PWR0601" H 3250 2500 50  0001 C CNN
+F 1 "+3.3V" H 3265 2823 50  0000 C CNN
+F 2 "" H 3250 2650 50  0001 C CNN
+F 3 "" H 3250 2650 50  0001 C CNN
+	1    3250 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3400 2750 3250 2750
+Wire Wire Line
+	3250 2750 3250 2650
+Wire Wire Line
+	3400 3350 3250 3350
+Wire Wire Line
+	3250 3350 3250 3450
+$Comp
+L power:GND #PWR0602
+U 1 1 5D16EBDA
+P 3250 3450
+F 0 "#PWR0602" H 3250 3200 50  0001 C CNN
+F 1 "GND" H 3255 3277 50  0000 C CNN
+F 2 "" H 3250 3450 50  0001 C CNN
+F 3 "" H 3250 3450 50  0001 C CNN
+	1    3250 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C601
+U 1 1 5D1700CF
+P 3250 3050
+F 0 "C601" H 3350 3100 50  0000 L CNN
+F 1 "100n" H 3350 3000 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 3288 2900 50  0001 C CNN
+F 3 "~" H 3250 3050 50  0001 C CNN
+	1    3250 3050
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 2900 3250 2750
+Connection ~ 3250 2750
+Wire Wire Line
+	3250 3200 3250 3350
+Connection ~ 3250 3350
+Wire Wire Line
+	4550 2800 4750 2800
+Wire Wire Line
+	4550 2950 4750 2950
+Wire Wire Line
+	4550 3050 4750 3050
+Wire Wire Line
+	4550 3150 4750 3150
+Wire Wire Line
+	4550 3250 4750 3250
+Text HLabel 4750 2800 2    50   Input ~ 0
+BL_E
+Text HLabel 4750 2950 2    50   Input ~ 0
+DC
+Text HLabel 4750 3050 2    50   Input ~ 0
+SCK
+Text HLabel 4750 3150 2    50   Input ~ 0
+MOSI
+Text HLabel 4750 3250 2    50   Input ~ 0
+~RST
+Text Label 4600 3250 0    50   ~ 0
+~RST
+$Comp
+L Connector_Generic:Conn_02x08_Odd_Even X601
+U 1 1 5D17F3F6
+P 3900 4500
+F 0 "X601" H 3950 4900 50  0000 C CNN
+F 1 "3.5'' LCD" H 3950 4000 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x16_P2.54mm_Vertical" H 3900 4500 50  0001 C CNN
+F 3 "~" H 3900 4500 50  0001 C CNN
+	1    3900 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0605
+U 1 1 5D1804EC
+P 4250 4950
+F 0 "#PWR0605" H 4250 4700 50  0001 C CNN
+F 1 "GND" H 4255 4777 50  0000 C CNN
+F 2 "" H 4250 4950 50  0001 C CNN
+F 3 "" H 4250 4950 50  0001 C CNN
+	1    4250 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4200 4900 4250 4900
+Wire Wire Line
+	4250 4900 4250 4950
+Wire Wire Line
+	3700 4200 3650 4200
+$Comp
+L power:+5V #PWR0603
+U 1 1 5D1817F6
+P 3650 4200
+F 0 "#PWR0603" H 3650 4050 50  0001 C CNN
+F 1 "+5V" H 3665 4373 50  0000 C CNN
+F 2 "" H 3650 4200 50  0001 C CNN
+F 3 "" H 3650 4200 50  0001 C CNN
+	1    3650 4200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4200 4200 4300 4200
+Wire Wire Line
+	3700 4300 3600 4300
+Wire Wire Line
+	4200 4300 4300 4300
+Wire Wire Line
+	4200 4400 4300 4400
+Wire Wire Line
+	4200 4500 4300 4500
+Wire Wire Line
+	4200 4600 4300 4600
+Wire Wire Line
+	4200 4700 4300 4700
+Wire Wire Line
+	4200 4800 4350 4800
+Wire Wire Line
+	3700 4400 3600 4400
+Wire Wire Line
+	3700 4500 3600 4500
+Wire Wire Line
+	3700 4600 3600 4600
+Wire Wire Line
+	3700 4700 3600 4700
+Wire Wire Line
+	3700 4800 3600 4800
+Wire Wire Line
+	3700 4900 3600 4900
+Text HLabel 4300 4200 2    50   Input ~ 0
+LCD_D0
+Text HLabel 3600 4300 0    50   Input ~ 0
+LCD_D1
+Text HLabel 4300 4300 2    50   Input ~ 0
+LCD_D2
+Text HLabel 3600 4400 0    50   Input ~ 0
+LCD_D3
+Text HLabel 4300 4400 2    50   Input ~ 0
+LCD_D4
+Text HLabel 3600 4500 0    50   Input ~ 0
+LCD_D5
+Text HLabel 4300 4500 2    50   Input ~ 0
+LCD_D6
+Text HLabel 3600 4600 0    50   Input ~ 0
+LCD_D7
+Text HLabel 4300 4600 2    50   Input ~ 0
+LCD_RD
+Text HLabel 3600 4800 0    50   Input ~ 0
+LCD_RS
+Text HLabel 4300 4700 2    50   Input ~ 0
+LCD_CS
+Text HLabel 3600 4700 0    50   Input ~ 0
+LCD_WR
+Text Label 4350 4800 2    50   ~ 0
+~RST
+$Comp
+L power:GND #PWR0604
+U 1 1 5D188347
+P 3600 4950
+F 0 "#PWR0604" H 3600 4700 50  0001 C CNN
+F 1 "GND" H 3605 4777 50  0000 C CNN
+F 2 "" H 3600 4950 50  0001 C CNN
+F 3 "" H 3600 4950 50  0001 C CNN
+	1    3600 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3600 4900 3600 4950
+$EndSCHEMATC

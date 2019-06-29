@@ -58,8 +58,10 @@ void LcdHandler::init(void) {
 }
 
 void LcdHandler::TaskLcd(void) {
+  static uint32_t last_millis = millis();
+  constexpr uint16_t task_interval = 100; // ms
 
-  for (;;) {
+  if ( (millis() - last_millis) >= task_interval) {
     // check our buttons
 
     switch (currentState) {

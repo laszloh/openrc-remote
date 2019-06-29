@@ -1,0 +1,219 @@
+EESchema Schematic File Version 4
+LIBS:Mega_2560_core_2.2_PM-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 7 9
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L RF:NRF24L01_Breakout S701
+U 1 1 5D1A0A1A
+P 4000 2700
+F 0 "S701" H 4380 2746 50  0000 L CNN
+F 1 "NRF24L01_Breakout" H 4380 2655 50  0000 L CNN
+F 2 "RF_Module:nRF24L01_Breakout" H 4150 3300 50  0001 L CIN
+F 3 "http://www.nordicsemi.com/eng/content/download/2730/34105/file/nRF24L01_Product_Specification_v2_0.pdf" H 4000 2600 50  0001 C CNN
+	1    4000 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0701
+U 1 1 5D1A1BDE
+P 4000 1600
+F 0 "#PWR0701" H 4000 1450 50  0001 C CNN
+F 1 "+3.3V" H 4015 1773 50  0000 C CNN
+F 2 "" H 4000 1600 50  0001 C CNN
+F 3 "" H 4000 1600 50  0001 C CNN
+	1    4000 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0704
+U 1 1 5D1A3BC4
+P 4000 3300
+F 0 "#PWR0704" H 4000 3050 50  0001 C CNN
+F 1 "GND" H 4005 3127 50  0000 C CNN
+F 2 "" H 4000 3300 50  0001 C CNN
+F 3 "" H 4000 3300 50  0001 C CNN
+	1    4000 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0702
+U 1 1 5D1A67E4
+P 4150 2000
+F 0 "#PWR0702" H 4150 1750 50  0001 C CNN
+F 1 "GND" H 4150 1850 50  0000 C CNN
+F 2 "" H 4150 2000 50  0001 C CNN
+F 3 "" H 4150 2000 50  0001 C CNN
+	1    4150 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C701
+U 1 1 5D1A6FAE
+P 4150 1850
+F 0 "C701" H 4265 1896 50  0000 L CNN
+F 1 "100n" H 4265 1805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4188 1700 50  0001 C CNN
+F 3 "~" H 4150 1850 50  0001 C CNN
+	1    4150 1850
+	1    0    0    -1  
+$EndComp
+Text HLabel 3300 2400 0    50   Input ~ 0
+MOSI
+Wire Wire Line
+	3500 2400 3300 2400
+Text HLabel 3300 2500 0    50   Output ~ 0
+MISO
+Wire Wire Line
+	3300 2500 3500 2500
+Text HLabel 3300 2600 0    50   Input ~ 0
+SCK
+Wire Wire Line
+	3300 2600 3500 2600
+Text HLabel 3300 2700 0    50   Input ~ 0
+~RF_CS
+Wire Wire Line
+	3300 2700 3500 2700
+NoConn ~ 3500 3000
+Text HLabel 3300 2900 0    50   Input ~ 0
+RF_CE
+Wire Wire Line
+	3300 2900 3500 2900
+$Comp
+L Device:C C702
+U 1 1 5D1B146E
+P 4550 1850
+F 0 "C702" H 4665 1896 50  0000 L CNN
+F 1 "10u" H 4665 1805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4588 1700 50  0001 C CNN
+F 3 "~" H 4550 1850 50  0001 C CNN
+	1    4550 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4550 1700 4550 1650
+Wire Wire Line
+	4550 1650 4150 1650
+Wire Wire Line
+	4150 1700 4150 1650
+Connection ~ 4150 1650
+Wire Wire Line
+	4000 2100 4000 1650
+Wire Wire Line
+	4150 1650 4000 1650
+Connection ~ 4000 1650
+Wire Wire Line
+	4000 1650 4000 1600
+$Comp
+L power:GND #PWR0703
+U 1 1 5D1BA530
+P 4550 2000
+F 0 "#PWR0703" H 4550 1750 50  0001 C CNN
+F 1 "GND" H 4550 1850 50  0000 C CNN
+F 2 "" H 4550 2000 50  0001 C CNN
+F 3 "" H 4550 2000 50  0001 C CNN
+	1    4550 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x08 X701
+U 1 1 5D259580
+P 3950 4400
+F 0 "X701" H 4030 4392 50  0000 L CNN
+F 1 "Conn_01x08" H 4030 4301 50  0000 L CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x08_P2.54mm_Vertical" H 3950 4400 50  0001 C CNN
+F 3 "~" H 3950 4400 50  0001 C CNN
+	1    3950 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0705
+U 1 1 5D25A0C0
+P 3500 4000
+F 0 "#PWR0705" H 3500 3850 50  0001 C CNN
+F 1 "+5V" H 3515 4173 50  0000 C CNN
+F 2 "" H 3500 4000 50  0001 C CNN
+F 3 "" H 3500 4000 50  0001 C CNN
+	1    3500 4000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3750 4200 3500 4200
+Wire Wire Line
+	3500 4200 3500 4000
+Wire Wire Line
+	3750 4100 3700 4100
+Wire Wire Line
+	3700 4100 3700 4000
+$Comp
+L power:+BATT #PWR0706
+U 1 1 5D25BC04
+P 3700 4000
+F 0 "#PWR0706" H 3700 3850 50  0001 C CNN
+F 1 "+BATT" H 3715 4173 50  0000 C CNN
+F 2 "" H 3700 4000 50  0001 C CNN
+F 3 "" H 3700 4000 50  0001 C CNN
+	1    3700 4000
+	1    0    0    -1  
+$EndComp
+Text HLabel 2800 4400 0    50   Input ~ 0
+Module_PPM
+Wire Wire Line
+	3750 4400 3150 4400
+Wire Wire Line
+	3750 4600 3700 4600
+Wire Wire Line
+	3750 4300 3700 4300
+Wire Wire Line
+	3700 4300 3700 4600
+Connection ~ 3700 4600
+Wire Wire Line
+	3750 4500 3600 4500
+Wire Wire Line
+	3750 4700 3600 4700
+Wire Wire Line
+	3750 4800 3600 4800
+Wire Wire Line
+	3700 4600 3700 4850
+$Comp
+L power:GND #PWR0707
+U 1 1 5D25E4DF
+P 3700 4850
+F 0 "#PWR0707" H 3700 4600 50  0001 C CNN
+F 1 "GND" H 3705 4677 50  0000 C CNN
+F 2 "" H 3700 4850 50  0001 C CNN
+F 3 "" H 3700 4850 50  0001 C CNN
+	1    3700 4850
+	1    0    0    -1  
+$EndComp
+Text HLabel 3600 4500 0    50   Input ~ 0
+Module_RX
+Text HLabel 3600 4700 0    50   Input ~ 0
+Module_TX
+Text HLabel 3600 4800 0    50   Input ~ 0
+Module_SimControl
+$Comp
+L Device:R R701
+U 1 1 5D25FAFB
+P 3000 4400
+F 0 "R701" V 2900 4400 50  0000 C CNN
+F 1 "200R" V 3100 4400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2930 4400 50  0001 C CNN
+F 3 "~" H 3000 4400 50  0001 C CNN
+	1    3000 4400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2850 4400 2800 4400
+$EndSCHEMATC

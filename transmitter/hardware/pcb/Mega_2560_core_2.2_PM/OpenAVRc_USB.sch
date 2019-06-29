@@ -1,0 +1,194 @@
+EESchema Schematic File Version 4
+LIBS:Mega_2560_core_2.2_PM-cache
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 8 8
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L SilentWorks:CH340G X?
+U 1 1 5D232FD7
+P 3350 3250
+F 0 "X?" H 3350 3950 60  0000 C CNN
+F 1 "CH340G" H 3350 2450 60  0000 C CNN
+F 2 "" H 3450 3050 60  0000 C CNN
+F 3 "" H 3450 3050 60  0000 C CNN
+	1    3350 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 2700 2700 2700
+Wire Wire Line
+	2700 2700 2700 2400
+$Comp
+L power:+5V #PWR?
+U 1 1 5D238D22
+P 2700 2350
+F 0 "#PWR?" H 2700 2200 50  0001 C CNN
+F 1 "+5V" H 2715 2523 50  0000 C CNN
+F 2 "" H 2700 2350 50  0001 C CNN
+F 3 "" H 2700 2350 50  0001 C CNN
+	1    2700 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D239BD7
+P 2650 3150
+F 0 "#PWR?" H 2650 2900 50  0001 C CNN
+F 1 "GND" H 2655 2977 50  0000 C CNN
+F 2 "" H 2650 3150 50  0001 C CNN
+F 3 "" H 2650 3150 50  0001 C CNN
+	1    2650 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2750 3000 2650 3000
+Wire Wire Line
+	2750 2850 2400 2850
+$Comp
+L Device:C C?
+U 1 1 5D23B534
+P 2400 3000
+F 0 "C?" H 2285 2954 50  0000 R CNN
+F 1 "10n" H 2285 3045 50  0000 R CNN
+F 2 "" H 2438 2850 50  0001 C CNN
+F 3 "~" H 2400 3000 50  0001 C CNN
+	1    2400 3000
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D23CED6
+P 2400 3150
+F 0 "#PWR?" H 2400 2900 50  0001 C CNN
+F 1 "GND" H 2405 2977 50  0000 C CNN
+F 2 "" H 2400 3150 50  0001 C CNN
+F 3 "" H 2400 3150 50  0001 C CNN
+	1    2400 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 3000 2650 3150
+$Comp
+L Device:C C?
+U 1 1 5D23F7C7
+P 2400 2450
+F 0 "C?" H 2285 2404 50  0000 R CNN
+F 1 "10n" H 2285 2495 50  0000 R CNN
+F 2 "" H 2438 2300 50  0001 C CNN
+F 3 "~" H 2400 2450 50  0001 C CNN
+	1    2400 2450
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5D241B13
+P 2400 2600
+F 0 "#PWR?" H 2400 2350 50  0001 C CNN
+F 1 "GND" H 2405 2427 50  0000 C CNN
+F 2 "" H 2400 2600 50  0001 C CNN
+F 3 "" H 2400 2600 50  0001 C CNN
+	1    2400 2600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 2300 2550 2300
+Wire Wire Line
+	2550 2300 2550 2400
+Wire Wire Line
+	2550 2400 2700 2400
+Connection ~ 2700 2400
+Wire Wire Line
+	2700 2400 2700 2350
+NoConn ~ 2750 3450
+NoConn ~ 2750 3550
+NoConn ~ 3900 3900
+NoConn ~ 3900 3050
+NoConn ~ 3900 3150
+NoConn ~ 3900 3250
+NoConn ~ 3900 3350
+NoConn ~ 3900 3450
+NoConn ~ 3900 3550
+$Comp
+L Connector:USB_OTG X?
+U 1 1 5D243BB7
+P 1250 3800
+F 0 "X?" H 1307 4267 50  0000 C CNN
+F 1 "USB_OTG" H 1307 4176 50  0000 C CNN
+F 2 "" H 1400 3750 50  0001 C CNN
+F 3 " ~" H 1400 3750 50  0001 C CNN
+	1    1250 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1550 3800 2750 3800
+Wire Wire Line
+	2750 3900 1550 3900
+$Comp
+L power:GND #PWR?
+U 1 1 5D246D83
+P 1250 4300
+F 0 "#PWR?" H 1250 4050 50  0001 C CNN
+F 1 "GND" H 1255 4127 50  0000 C CNN
+F 2 "" H 1250 4300 50  0001 C CNN
+F 3 "" H 1250 4300 50  0001 C CNN
+	1    1250 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1150 4200 1150 4250
+Wire Wire Line
+	1150 4250 1250 4250
+Wire Wire Line
+	1250 4200 1250 4250
+Connection ~ 1250 4250
+Wire Wire Line
+	1250 4250 1250 4300
+NoConn ~ 1550 4000
+Wire Wire Line
+	1550 3600 1650 3600
+Wire Wire Line
+	1650 3600 1650 3450
+$Comp
+L Device:D D?
+U 1 1 5D248C25
+P 1650 3300
+F 0 "D?" V 1604 3379 50  0000 L CNN
+F 1 "D" V 1695 3379 50  0000 L CNN
+F 2 "" H 1650 3300 50  0001 C CNN
+F 3 "~" H 1650 3300 50  0001 C CNN
+	1    1650 3300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1650 3150 1650 3100
+$Comp
+L power:+5V #PWR?
+U 1 1 5D249AB1
+P 1650 3100
+F 0 "#PWR?" H 1650 2950 50  0001 C CNN
+F 1 "+5V" H 1665 3273 50  0000 C CNN
+F 2 "" H 1650 3100 50  0001 C CNN
+F 3 "" H 1650 3100 50  0001 C CNN
+	1    1650 3100
+	1    0    0    -1  
+$EndComp
+Text HLabel 4050 2700 2    50   Output ~ 0
+USB_TX
+Text HLabel 4050 2800 2    50   Input ~ 0
+USB_RX
+Wire Wire Line
+	4050 2800 3900 2800
+Wire Wire Line
+	3900 2700 4050 2700
+$EndSCHEMATC
