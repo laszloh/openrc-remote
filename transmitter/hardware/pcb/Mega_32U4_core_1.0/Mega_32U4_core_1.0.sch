@@ -299,8 +299,6 @@ Wire Wire Line
 	3500 850  3850 850 
 Wire Wire Line
 	3850 850  3850 900 
-Wire Wire Line
-	3850 850  4900 850 
 Connection ~ 3850 850 
 Wire Wire Line
 	3850 1300 3850 1250
@@ -324,17 +322,6 @@ Wire Wire Line
 	3850 800  3850 850 
 Text GLabel 4300 1250 2    50   Output ~ 0
 VBAT_AN
-$Comp
-L Device:CP C101
-U 1 1 5D1C7412
-P 4900 1050
-F 0 "C101" H 5018 1096 50  0000 L CNN
-F 1 "100u" H 5018 1005 50  0000 L CNN
-F 2 "Capacitor_SMD:CP_Elec_10x10" H 4938 900 50  0001 C CNN
-F 3 "~" H 4900 1050 50  0001 C CNN
-	1    4900 1050
-	1    0    0    -1  
-$EndComp
 $Comp
 L Device:C C102
 U 1 1 5D1C8283
@@ -368,15 +355,6 @@ F 3 "~" H 7150 1050 50  0001 C CNN
 	1    7150 1050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4900 900  4900 850 
-Connection ~ 4900 850 
-Wire Wire Line
-	4900 850  5300 850 
-Wire Wire Line
-	4900 1200 4900 1250
-Wire Wire Line
-	4900 1250 5300 1250
 Connection ~ 5300 1250
 Wire Wire Line
 	5300 1200 5300 1250
@@ -530,7 +508,7 @@ U 1 1 5D1F2F3A
 P 1150 8700
 F 0 "X108" H 1230 8742 50  0000 L CNN
 F 1 "Stick_RH" H 1230 8651 50  0000 L CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-05A_1x05_P2.54mm_Vertical" H 1150 8700 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical" H 1150 8700 50  0001 C CNN
 F 3 "~" H 1150 8700 50  0001 C CNN
 	1    1150 8700
 	-1   0    0    -1  
@@ -541,7 +519,7 @@ U 1 1 5D1F4113
 P 1150 9250
 F 0 "X109" H 1230 9292 50  0000 L CNN
 F 1 "Stick_RV" H 1230 9201 50  0000 L CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-05A_1x05_P2.54mm_Vertical" H 1150 9250 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical" H 1150 9250 50  0001 C CNN
 F 3 "~" H 1150 9250 50  0001 C CNN
 	1    1150 9250
 	-1   0    0    -1  
@@ -552,7 +530,7 @@ U 1 1 5D1F46AF
 P 1150 10350
 F 0 "X111" H 1230 10392 50  0000 L CNN
 F 1 "Stick_LV" H 1230 10301 50  0000 L CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-05A_1x05_P2.54mm_Vertical" H 1150 10350 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical" H 1150 10350 50  0001 C CNN
 F 3 "~" H 1150 10350 50  0001 C CNN
 	1    1150 10350
 	-1   0    0    -1  
@@ -563,7 +541,7 @@ U 1 1 5D1F5B1A
 P 1150 9800
 F 0 "X110" H 1230 9842 50  0000 L CNN
 F 1 "Stick_LH" H 1230 9751 50  0000 L CNN
-F 2 "Connector_Molex:Molex_KK-254_AE-6410-05A_1x05_P2.54mm_Vertical" H 1150 9800 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x05_P2.54mm_Vertical" H 1150 9800 50  0001 C CNN
 F 3 "~" H 1150 9800 50  0001 C CNN
 	1    1150 9800
 	-1   0    0    -1  
@@ -866,13 +844,6 @@ Connection ~ 6900 7050
 Wire Wire Line
 	6900 7050 6900 7150
 Wire Wire Line
-	6800 7050 6800 6950
-Wire Wire Line
-	6450 6950 6800 6950
-Connection ~ 6800 6950
-Wire Wire Line
-	6800 6950 7050 6950
-Wire Wire Line
 	6450 6950 6350 6950
 Connection ~ 6450 6950
 Text Label 3100 6050 0    50   ~ 0
@@ -885,7 +856,7 @@ U 1 1 5D2EA342
 P 7000 5500
 F 0 "X104" H 6720 5596 50  0000 R CNN
 F 1 "AVR-ISP-6" H 6720 5505 50  0000 R CNN
-F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" V 6750 5550 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x03_P2.54mm_Vertical" V 6750 5550 50  0001 C CNN
 F 3 " ~" H 5725 4950 50  0001 C CNN
 	1    7000 5500
 	-1   0    0    -1  
@@ -1307,4 +1278,30 @@ Wire Wire Line
 	1350 1950 1300 1950
 Wire Wire Line
 	1300 1950 1300 2000
+Wire Wire Line
+	6450 6950 7050 6950
+Wire Wire Line
+	6800 7050 6900 7050
+Wire Wire Line
+	3850 850  4950 850 
+$Comp
+L Device:C C101
+U 1 1 5D202374
+P 4950 1050
+F 0 "C101" H 5065 1096 50  0000 L CNN
+F 1 "10u" H 5065 1005 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H 4988 900 50  0001 C CNN
+F 3 "~" H 4950 1050 50  0001 C CNN
+	1    4950 1050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5300 1250 4950 1250
+Wire Wire Line
+	4950 1250 4950 1200
+Wire Wire Line
+	4950 900  4950 850 
+Connection ~ 4950 850 
+Wire Wire Line
+	4950 850  5300 850 
 $EndSCHEMATC
